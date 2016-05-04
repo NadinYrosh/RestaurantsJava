@@ -1,16 +1,47 @@
+import java.util.List;
 import org.sql2o.*;
 import java.util.Arrays;
 
 public class Cuisine {
   private String name;
+  private int id;
+
+
 
   public Cuisine(String name) {
     this.name = name;
+    // this.id = id;
   }
 
   public String getName(){
     return name;
   }
 
+  public static List<Cuisine> all(){
+    String sql = "SELECT id,name FROM cuisine";
+    try(Connection con = DB.sql2o.open()) {
+      return con.createQuery(sql).executeAndFetch(Cuisine.class);
+    }
+  }
+
+  @Override
+  public boolean equals(Object otherCuisine){
+    if (!(otherCuisine instanceof Cuisine)){
+      return false;
+    } else {
+      Cuisine newCuisine = (Cuisine) otherCuisine;
+      return newCuisine.getName().equals(this.getName());
+    }
+  }
+
+  public void save(){
+    String sql = "INSERT INTO cuisine (name) VALUES (:name)";
+    try (Connection con = DB.sql2o.open()){
+      this.id = (int) con.createQuery(sql, true)
+      .addParameter("name", this.name)
+      .executeUpdate()
+      .getKey();
+    }
+  }
 
 }
