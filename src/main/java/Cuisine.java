@@ -10,7 +10,6 @@ public class Cuisine {
 
   public Cuisine(String name) {
     this.name = name;
-    // this.id = id;
   }
 
   public String getName(){
@@ -35,7 +34,7 @@ public class Cuisine {
       return false;
     } else {
       Cuisine newCuisine = (Cuisine) otherCuisine;
-      return newCuisine.getName().equals(this.getName());
+      return newCuisine.getName().equals(this.getName()) && newCuisine.getId() == (this.getId());
     }
   }
 
