@@ -43,4 +43,12 @@ public class CuisineTest {
     assertTrue(newCuisine.equals(Cuisine.all().get(0)));
   }
 
+  @Test
+  public void find_CusuineInDataBase_true(){
+    Cuisine newCuisine = new Cuisine("Indian");
+    newCuisine.save();
+    Cuisine savedCuisine = Cuisine.find(newCuisine.getId());
+    assertTrue(newCuisine.equals(savedCuisine));
+  }
+
 }

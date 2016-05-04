@@ -17,6 +17,11 @@ public class Cuisine {
     return name;
   }
 
+  public int getId(){
+    return id;
+  }
+
+
   public static List<Cuisine> all(){
     String sql = "SELECT id,name FROM cuisine";
     try(Connection con = DB.sql2o.open()) {
@@ -41,6 +46,16 @@ public class Cuisine {
       .addParameter("name", this.name)
       .executeUpdate()
       .getKey();
+    }
+  }
+
+  public static Cuisine find(int id){
+    try(Connection con = DB.sql2o.open()){
+      String sql = "SELECT * FROM cuisine WHERE id=:id";
+      Cuisine cusine =  con.createQuery(sql)
+        .addParameter("id", id)
+        .executeAndFetchFirst(Cuisine.class);
+      return cusine;
     }
   }
 
