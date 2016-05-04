@@ -19,16 +19,15 @@ public class CuisineTest {
   //     con.createQuery(deleteCategoriesQuery).executeUpdate();
   //   }
   // }
-
+  @Test
   public void Cuisine_InstantiatesCorrectly_true(){
     Cuisine newCuisine = new Cuisine("Indian");
     assertTrue(newCuisine instanceof Cuisine);
   }
 
+  @Test
   public void Cuisine_returnNameCorrectly_name(){
     Cuisine newCuisine = new Cuisine("Indian");
     assertEquals ("Indian", newCuisine.getName());
   }
-
-
 }
