@@ -13,6 +13,9 @@ import static org.fluentlenium.core.filter.FilterConstructor.*;
 public class AppTest extends FluentTest {
   public WebDriver webDriver = new HtmlUnitDriver();
 
+  @Rule
+  public DatabaseRule database = new DatabaseRule();
+
   @Override
   public WebDriver getDefaultDriver() {
     return webDriver;
@@ -34,6 +37,19 @@ public class AppTest extends FluentTest {
     fill("#name").with("Indian");
     submit(".btn");
     assertThat(pageSource()).contains("Success!");
+  }
+
+  @Test
+  public void CuisineIsDisplayed() {
+    // goTo("http://localhost:4567/");
+    // click("a", withText("Add a new cuisine"));
+    // fill("#name").with("Indian");
+    // submit(".btn");
+    Cuisine newCuisine = new Cuisine("Indian");
+    newCuisine.save();
+    String cuisinesPath = String.format("http://localhost:4567/cuisines");
+    goTo(cuisinesPath);
+    assertThat(pageSource()).contains("Indian");
   }
 
 

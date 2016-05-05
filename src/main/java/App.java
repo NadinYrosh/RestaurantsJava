@@ -4,8 +4,10 @@ import spark.ModelAndView;
 import spark.template.velocity.VelocityTemplateEngine;
 import static spark.Spark.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class App {
+  
   public static void main(String[] args) {
     staticFileLocation("/public");
     String layout = "templates/layout.vtl";
@@ -32,9 +34,13 @@ public class App {
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
-
-
-
+    get("/cuisines", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      List<Cuisine> cuisines = Cuisine.all();
+      model.put("cuisines", cuisines);
+      model.put("template", "templates/cuisines.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
 
 
 

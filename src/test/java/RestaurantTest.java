@@ -6,21 +6,8 @@ import java.util.Arrays;
 
 public class RestaurantTest {
 
-  @Before
-  public void setUp() {
-    DB.sql2o = new Sql2o("jdbc:postgresql://localhost:5432/best_restaurants_test", null, null);
-  }
-
-  @After
-  public void tearDown() {
-    try(Connection con = DB.sql2o.open()) {
-      String deleteCuisineQuery = "DELETE FROM cuisine *;";
-      String deleteRestaurantsQuery = "DELETE FROM restaurants *;";
-      con.createQuery(deleteCuisineQuery).executeUpdate();
-      con.createQuery(deleteRestaurantsQuery).executeUpdate();
-    }
-  }
-
+  @Rule
+  public DatabaseRule database = new DatabaseRule();
 
   @Test
   public void Restaurant_InstantiatesCorrectly_true(){
