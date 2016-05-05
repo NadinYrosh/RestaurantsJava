@@ -58,7 +58,7 @@ public class CuisineTest {
     firstRestaurant.save();
     Restaurant secondRestaurant = new Restaurant ("Mark's", "11-7", myCuisine.getId());
     secondRestaurant.save();
-    Restaurant[] restaurants = new Restaurant[] {firstRestaurant,secondRestaurant,thirdRestaurant};
+    Restaurant[] restaurants = new Restaurant[] {firstRestaurant,secondRestaurant};
     assertTrue(myCuisine.getRestaurants().containsAll(Arrays.asList(restaurants)));
   }
 }
