@@ -66,7 +66,5 @@ public class App {
       model.put("cuisine", newCuisine);
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
-
-
   }
 }

@@ -19,6 +19,6 @@
 
 <ul>
   #foreach ($restaurant in $restaurants)
-    <li><a href="/cuisines/$cuisine.getId()">$restaurant.getName()</a></li>
+    <li><a href="/cuisines/$cuisine.getId()">$restaurant.getName() Open hours are: $restaurant.getHours()</a></li>
   #end
 </ul>
