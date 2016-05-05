@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class App {
-  
+
   public static void main(String[] args) {
     staticFileLocation("/public");
     String layout = "templates/layout.vtl";
@@ -42,6 +42,15 @@ public class App {
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
+    get("/cuisines/:id", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      Cuisine newCuisine = Cuisine.find(Integer.parseInt(request.params(":id")));
+
+      // List<Restaurant> restaurants = Cuisine.getRestaurants();
+      model.put("restaurants", newCuisine.getRestaurants());
+      model.put("template", "templates/cuisine.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
 
 
   }

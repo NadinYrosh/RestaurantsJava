@@ -1,0 +1,19 @@
+<h1>$cuisine.getName()</h1>
+
+<form action="/cuisines/$cuisine.getId()/restaurants" method="post">
+  <!-- <input id="wordId" name="wordId" type="hidden" value="$word.getId()"> -->
+
+  <div class="form-group">
+    <label for="restaurant">Restaurant</label>
+    <input id="restaurant" name="restaurant" type="text" class="form-control">
+  </div>
+
+  <button type="submit" class="btn btn-success">Add a new restaurant</button>
+</form>
+
+
+<ul>
+  #foreach ($restaurant in $restaurants)
+    <li><a href="/cuisines/$cuisine.getId()">$restaurant.getName()</a></li>
+  #end
+</ul>

@@ -52,6 +52,16 @@ public class AppTest extends FluentTest {
     assertThat(pageSource()).contains("Indian");
   }
 
+  @Test
+  public void cuisinesShowPageDisplaysName() {
+    Cuisine newCuisine = new Cuisine("Indian");
+    newCuisine.save();
+    String cuisinesPath = String.format("http://localhost:4567/cuisines");
+    goTo(cuisinesPath);
+    click("a", withText("Indian"));
+    assertThat(pageSource()).contains("Add a new restaurant");
+  }
+
 
 
 }
