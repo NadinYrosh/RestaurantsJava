@@ -35,7 +35,7 @@ public class Restaurant{
 
 
   public static List<Restaurant> all(){
-    String sql = "SELECT id,name FROM restaurants";
+    String sql = "SELECT * FROM restaurants";
     try(Connection con = DB.sql2o.open()) {
       return con.createQuery(sql).executeAndFetch(Restaurant.class);
     }
