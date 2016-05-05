@@ -51,4 +51,14 @@ public class CuisineTest {
     assertTrue(newCuisine.equals(savedCuisine));
   }
 
+  @Test
+  public void getRestaurants_retrieveAllRestaurantsInCuisineFromDatabase_true(){
+    Cuisine myCuisine = new Cuisine("Indian");
+    Restaurant firstRestaurant = new Restaurant ("Luca's", "11-7", myCuisine.getId());
+    firstRestaurant.save();
+    Restaurant secondRestaurant = new Restaurant ("Mark's", "11-7", myCuisine.getId());
+    secondRestaurant.save();
+    Restaurant[] restaurants = new Restaurant[] {firstRestaurant,secondRestaurant,thirdRestaurant};
+    assertTrue(myCuisine.getRestaurants().containsAll(Arrays.asList(restaurants)));
+  }
 }

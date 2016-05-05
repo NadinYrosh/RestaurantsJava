@@ -49,7 +49,8 @@ public class Restaurant{
       Restaurant newRestaurant = (Restaurant) otherRestaurant;
       return newRestaurant.getName()
              .equals(this.getName()) &&
-             newRestaurant.getCuisineId() == (this.getCuisineId());
+             newRestaurant.getCuisineId() == (this.getCuisineId()) &&
+             newRestaurant.getHours().equals(this.getHours()) ;
     }
   }
 
@@ -64,17 +65,14 @@ public class Restaurant{
       .getKey();
     }
   }
-  //
-  // public static Cuisine find(int id){
-  //   try(Connection con = DB.sql2o.open()){
-  //     String sql = "SELECT * FROM cuisine WHERE id=:id";
-  //     Cuisine cusine =  con.createQuery(sql)
-  //       .addParameter("id", id)
-  //       .executeAndFetchFirst(Cuisine.class);
-  //     return cusine;
-  //   }
-  // }
 
-
-
+  public static Restaurant find(int id){
+    try(Connection con = DB.sql2o.open()){
+      String sql = "SELECT * FROM restaurants WHERE id=:id";
+      Restaurant restaurant =  con.createQuery(sql)
+        .addParameter("id", id)
+        .executeAndFetchFirst(Restaurant.class);
+      return restaurant;
+    }
+  }
 }

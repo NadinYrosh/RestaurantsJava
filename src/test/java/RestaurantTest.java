@@ -52,12 +52,27 @@ public class RestaurantTest {
   }
 
   @Test
-  public void save_restaurantIsSavedCorrectly(){
+  public void save_restaurantIsSavedRestaurant(){
     Restaurant newRestaurant = new Restaurant("Luca's", "11-7", 1);
     newRestaurant.save();
     assertTrue(newRestaurant.getId() == Restaurant.all().get(0).getId());
   }
 
+  @Test
+  public void find_findsRestaurantInDatabase_True() {
+    Restaurant myRestaurant = new Restaurant("Luca's", "11-7", 1);
+    myRestaurant.save();
+    Restaurant savedRestaurant = Restaurant.find(myRestaurant.getId());
+    assertTrue(myRestaurant.equals(savedRestaurant));
+  }
 
-
+  @Test
+  public void save_savesCuisineIdIntoDB_true() {
+    Cuisine myCuisine = new Cuisine("Indian");
+    myCuisine.save();
+    Restaurant myRestaurant = new Restaurant("Luca's", "11-7", myCuisine.getId());
+    myRestaurant.save();
+    Restaurant savedRestaurant = Restaurant.find(myRestaurant.getId());
+    assertEquals(savedRestaurant.getCuisineId(), myCuisine.getId());
+  }
 }
